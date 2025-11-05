@@ -17,9 +17,9 @@ return [
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
-
-    'allowed_origins' => ['*'],
+    'allowed_methods' => ['POST', 'PUT','PATCH','DELETE','OPTIONS'],
+  'allowed_origins' => ['http://127.0.0.1:8000',   'https://groupe-gestion-compte.onrender.com',
+],
 
     'allowed_origins_patterns' => [],
 
