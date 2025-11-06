@@ -18,13 +18,13 @@ class CompteFactory extends Factory
     public function definition(): array
     {
         return [
-        'id' => (string) Str::uuid(),
-         'client_id' => null, // sera assigné dans le seeder
-        'numero_compte' => 'ORANGE_BANK' . $this->faker->unique()->numberBetween(100000, 999999),
-        'type' => $this->faker->randomElement(['epargne', 'cheque']),
-        'statut' => 'actif',
-        "date_debut_blocage"=>fake()->date('Y-m-d'),
-        'date_fin_blocage' => fake()->dateTimeBetween('now', '+3 months'),
+            'id' => (string) Str::uuid(),
+            'client_id' => null, // sera assigné dans le seeder
+            'numero_compte' => 'ORANGE_BANK' . $this->faker->unique()->numberBetween(100000, 999999),
+            'type' => $this->faker->randomElement(['epargne', 'cheque']),
+            'statut' => 'actif',
+            "date_debut_blocage" => fake()->date('Y-m-d'),
+            'date_fin_blocage' => fake()->dateTimeBetween('now', '+3 months'),
 
 
 

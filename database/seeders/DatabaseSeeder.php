@@ -14,16 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(10)->create();
-         // Call Client and Compte seeders
+        User::factory(10)->create();
+        // Call Client and Compte seeders
         $this->call([
-            \Database\Seeders\ClientSeeder::class,
-            \Database\Seeders\CompteSeeder::class,
-            \Database\Seeders\AdminSeeder::class
+            ClientSeeder::class,
+            CompteSeeder::class,
+            AdminSeeder::class
 
 
         ]);
     }
-
-        
 }

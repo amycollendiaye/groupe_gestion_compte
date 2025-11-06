@@ -23,11 +23,7 @@ class Client extends Model
     }
     protected static function booted()
     {
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = (string) Str::uuid();
-            }
-        });
+        
     }
     public function comptes()
     {

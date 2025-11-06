@@ -25,11 +25,7 @@ class Compte extends Model
     ];
      protected static function booted()
     {
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = (string) Str::uuid();
-            }
-        });
+         
         static::addGlobalScope(new WithActif);
     }
     public function client(){

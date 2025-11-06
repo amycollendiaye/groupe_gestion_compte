@@ -23,20 +23,20 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-           return [
-             'id' => (string) Str::uuid(),
-             'nom' => $this->faker->lastName(),
-             'prenom' => $this->faker->firstName(),
-             'telephone' => $this->faker->phoneNumber(),
-             'adresse' => $this->faker->address(),
-             'statut' => $this->faker->randomElement(['actif', 'inactif']),
-             'cni' => strtoupper(Str::random(10)),
-             'login' => $this->faker->userName(),
-             'email' => $this->faker->unique()->safeEmail(),
-             'email_verified_at' => now(),
-             'password' => 'password',
-             'remember_token' => Str::random(10),
-           ];
+        return [
+            'id' => (string) Str::uuid(),
+            'nom' => $this->faker->lastName(),
+            'prenom' => $this->faker->firstName(),
+            'telephone' => $this->faker->phoneNumber(),
+            'adresse' => $this->faker->address(),
+            'statut' => $this->faker->randomElement(['actif', 'inactif']),
+            'cni' => strtoupper(Str::random(10)),
+            'login' => $this->faker->userName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => 'password',
+            'remember_token' => Str::random(10),
+        ];
     }
 
     /**
@@ -44,7 +44,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

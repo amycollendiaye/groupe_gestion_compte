@@ -14,11 +14,8 @@ class Admin extends Model
     use HasFactory;
     protected static function booted()
     {
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = (string) \Illuminate\Support\Str::uuid();
-            }
-        });
+        
+         
     }
       public function user()
     {

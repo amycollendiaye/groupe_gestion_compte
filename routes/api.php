@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
  Route::get('/comptes',[CompteController::class,"index"]);
+  Route::post('/comptes',[CompteController::class,'store']);
+  Route::post('/comptes-debug',[CompteController::class,'storeDebug']);

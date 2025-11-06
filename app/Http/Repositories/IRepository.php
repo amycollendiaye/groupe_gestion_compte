@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Http\Repositories;
 
-interface IRepository{
+interface IRepository
+{
     //  public function create(array $data);
-    public function getAll($filters=[], $order="desc", $sort="created_at",$limit=10);
+    public function getAll($filters = [], $order = "desc", $sort = "created_at", $limit = 10);
+    public function create (array $data);
 }

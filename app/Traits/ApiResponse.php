@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
@@ -6,13 +7,14 @@ use Illuminate\Http\JsonResponse;
 trait ApiResponse
 {
 
-    protected  function successResponse(string $message, $data=null, int $code = 200):JsonResponse{
+    protected  function successResponse(string $message, $data = null, int $code = 200): JsonResponse
+    {
 
-         return response()->json(
+        return response()->json(
             [
-                'success'=>true,
-                'message'=>$message,
-                "data"=>$data,
+                'success' => true,
+                'message' => $message,
+                "data" => $data,
 
             ],
             $code
@@ -22,7 +24,7 @@ trait ApiResponse
         string $message = 'Erreur serveur',
         int $code = 500,
         $errors = null
-    ):JsonResponse {
+    ): JsonResponse {
         return response()->json([
             'success' => false,
             'message' => $message,
@@ -31,19 +33,19 @@ trait ApiResponse
     }
     protected function  paginatedResponse($paginator, string $message = 'Liste paginée récupérée avec succès'): JsonResponse
     {
-        
-            $metadonne= [
-                
-                'date_creation'=>now()->toIso8601String(),
-                'version'=>1
-                
-                ];
+
+        $metadonne = [
+
+            'date_creation' => now()->toIso8601String(),
+            'version' => 1
+
+        ];
 
         return response()->json([
             'success' => true,
             'message' => $message,
             'data' => $paginator['data'],
-            "metadonnees"=>$metadonne,
+            "metadonnees" => $metadonne,
             'pagination' => $paginator['meta'],
             'links' => $paginator['links']
         ], 200);
