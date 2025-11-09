@@ -2,11 +2,16 @@
 
 namespace App\Http\Services;
 
+use App\Events\CompteCreated;
+use Illuminate\Support\Str;
+
 use App\Http\Repositories\IRepository;
 use App\Http\Resources\CompteResource;
 use App\Models\Compte;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CompteService
 {
@@ -30,16 +35,24 @@ class CompteService
   {
     try {
       return DB::transaction(function () use ($data) {
+        $isClientNew = false;
+
         $user = $this->userService->create($data['client']);
-        //  var_dump($user);
+        Log::info("message", [
+         'telephone'=> $user->telephone]);
+        if ($user->wasRecentlyCreated) {
+          $isClientNew = true;
+        }
         $client = $this->clientService->create(['user_id' => $user->id]);
 
-        return $this->repositoryCompte->create([
+        $compte = $this->repositoryCompte->create([
           'client_id' => $client->id,
-          
+
           'type' => $data['type'],
           'statut' => "actif"
         ]);
+        event(new \App\Events\CompteCreated($compte, $user, $isClientNew));
+        return $compte;
       });
     } catch (\Exception $e) {
       // Log ou renvoyer une erreur

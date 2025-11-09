@@ -38,11 +38,28 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropPrimary(['id']);
-            $table->unique('id');
-        });
-    }
+  public function down(): void
+{
+    // Supprimer les contraintes étrangères des tables dépendantes
+    Schema::table('clients', function (Blueprint $table) {
+        $table->dropForeign(['user_id']);
+    });
+    Schema::table('admins', function (Blueprint $table) {
+        $table->dropForeign(['user_id']);
+    });
+
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropPrimary(['id']);
+        $table->unique('id');
+    });
+
+    // Recréer les contraintes étrangères
+    Schema::table('clients', function (Blueprint $table) {
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    });
+    Schema::table('admins', function (Blueprint $table) {
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+    });
+}
+
 };

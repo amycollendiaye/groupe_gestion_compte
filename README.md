@@ -20,3 +20,5 @@ Gestion des erreurs non affichées en JSON → Modifié le contrôleur pour reto
 ## afficher les  comptes du client avec  id :  voici la commande
  php artisan tinker
 \App\Models\Compte::where('client_id', 'e159f39c-b861-4f1c-b454-9cb0b8717905')->get();
+ ## comment utiliser twillo pour la gestion des envoes de sms suite creation de compte
+ 

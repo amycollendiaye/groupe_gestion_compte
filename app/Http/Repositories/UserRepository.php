@@ -23,7 +23,7 @@ class UserRepository implements IRepositoryfirst
             'telephone' => $data['telephone'],
             'statut' => 'actif',
             "email"=>$data["email"],
-            'login' => $data['email']
+            // 'login' => $data['email']
             // 'cni'=>$data['cni'], ********
 
 

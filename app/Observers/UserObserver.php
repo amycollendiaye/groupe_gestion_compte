@@ -16,10 +16,27 @@ class UserObserver
     {
         if (empty($user->id)) {
             $user->id = (string) Str::uuid();
+
+               if (empty($user->login)) {
+            $nom = strtolower(preg_replace('/\s+/', '', $user->nom));
+            $prenom = strtolower(preg_replace('/\s+/', '', $user->prenom));
+            $baseLogin = $prenom . $nom; // ex: amycollendiaye
+            $domaine = '@orangebank.com';
+
+            do {
+                $random = rand(10, 99);
+                $login = $baseLogin . $random . $domaine;
+            } while (User::where('login', $login)->exists());
+
+            $user->login = $login;
+        }
             if (empty($user->password)) {
             $user->password = Hash::make(Str::random(10));
         }
         }
+    }
+    public function created(){
+        
     }
 
     /**

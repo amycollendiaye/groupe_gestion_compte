@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\CompteCreated;
 use Illuminate\Support\Str;
 
 use App\Models\Compte;
@@ -27,6 +28,18 @@ class CompteObserver
             $compte->numero_compte = 'ORANGEBANK-' . str_replace(' ', '', $compte);
         }
     }
+public function created(Compte $compte): void
+{
+    // Récupérer l'utilisateur via la relation client
+    $user = $compte->client->user;
+    
+    // Vérifier si l'utilisateur a été créé récemment (dans les dernières secondes)
+    $isClientNew = $user->wasRecentlyCreated;
+    
+    // Déclencher l'événement
+    event(new CompteCreated($compte, $user, $isClientNew));
+}
+
 
     /**
      * Handle the Compte "updated" event.

@@ -15,7 +15,9 @@ class ClientObserver
 
         if (empty($client->id)) {
             $client->id = (string) Str::uuid();
+
         }
+        
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\CompteCreated;
+use App\Jobs\SendSmsJob;
+use App\Listeners\SendCompteCreatedNotification;
 use App\Models\Admin;
 use App\Models\Client;
 use App\Models\Compte;
@@ -22,11 +25,39 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
-    ];
+    // protected $listen = [
+    //     Registered::class => [
+    //         SendEmailVerificationNotification::class,
+    //         // CompteCreated::class=> [SendSmsJob::class]
+    //         // CompteCreated::class => [
+    //         //     SendCompteCreatedNotification::class,
+    //         // ],
+    //         egistered::class => [
+    //     SendEmailVerificationNotification::class,
+    //     CompteCreated::class => [
+    //         SendCompteCreatedNotification::class,
+    //     ],
+    // ],
+    //     ],
+    // ];
+
+//     protected $listen = [
+//     Registered::class => [
+//         SendEmailVerificationNotification::class,
+//         CompteCreated::class => [
+//             SendCompteCreatedNotification::class,
+//         ],
+//     ],
+// ];
+
+protected $listen = [
+    Registered::class => [
+        SendEmailVerificationNotification::class,
+    ],
+    CompteCreated::class => [
+        SendCompteCreatedNotification::class,
+    ],
+];
 
     /**
      * Register any events for your application.
